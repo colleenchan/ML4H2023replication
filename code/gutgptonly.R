@@ -24,6 +24,17 @@ df <- df |>
   filter(GutGPT == "y") |>
   mutate(wave = factor(wave))
 
+df <- df |> 
+  mutate(age = case_when(
+    What.is.your.age. == 2 ~ "18-24",
+    What.is.your.age. == 3 ~ "25-29",
+    What.is.your.age. == 4 ~ "30-34",
+    What.is.your.age. == 5 ~ "35-39",
+    What.is.your.age. == 6 ~ "40-45",
+    What.is.your.age. == 7 ~ "45-49",
+    TRUE ~ as.factor(What.is.your.age.) 
+  ))
+
 # Table 1 demographics
 df |> 
   summarise(

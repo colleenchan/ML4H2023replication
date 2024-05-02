@@ -3,6 +3,7 @@ library(ggplot2)
 library(stringr)
 library(lubridate)
 library(tidyr)
+library(reshape2)
 
 # Read in data
 pre <- read.csv("data/Pre UTAUT Nov.csv", as.is = TRUE)

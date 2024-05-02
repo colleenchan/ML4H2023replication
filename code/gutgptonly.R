@@ -94,6 +94,22 @@ ggplot(res, aes(x = condition, y = mean, group = wave)) +
   coord_flip()
 dev.off()
 
+# differences plot
+diffs <- agg_mean |> 
+  summarise(across(-wave, ~ diff(.x) * -1)) %>%
+  pivot_longer(everything(), names_to = "condition", values_to = "Difference")
+
+png("figures/utautdiff_gutgpt.png", width = 5, height = 3, units = "in", res = 300)
+ggplot(diffs, aes(x = condition, y = Difference)) +
+  geom_bar(stat = "identity", position = position_dodge(), 
+           fill = "dodgerblue", color = "black", width = 0.5) +
+  coord_flip() +  
+  theme_bw() +
+  labs(x = "Condition",
+       y = "Mean Difference of Likert Value") +
+  theme( 
+        legend.position = "none") 
+dev.off()
 
 # Content assessment ==========================================================
 
